@@ -1,81 +1,95 @@
-🚀 Nombre del Proyecto: Open Tutor IA
-✨ Descripción del Proyecto
-Este proyecto es una app de inteligencia artificial que busca revolucionar la retroalimentación educativa en la educación básica de México. Usando el poder del modelo multimodal Gemma 3n de Google, la app ofrece a los alumnos un tutor personalizado que funciona directamente en sus dispositivos móviles. 📱
+🚀 Project Name: Open Tutor AI
+✨ Project Description
+This project is an artificial intelligence app that seeks to revolutionize educational feedback in basic education. Using the power of Google's Gemma 3n multimodal model, the model offers students a personalized tutor that works directly on their mobile devices, currently using Google AI Edge Gallery. 📱
 
-Nuestra solución se alinea y profundiza en los principios de la Nueva Escuela Mexicana (NEM) y los Libros de Texto Gratuitos (LTG), brindando una herramienta que fomenta el aprendizaje autónomo y atiende la brecha educativa en zonas de bajos recursos. 🏫
+Our solution aligns with and deepens the principles of expected learning outcomes for basic education, providing a tool that promotes autonomous learning and addresses the educational gap in low-resource areas. 🏫
 
-🧐 El Problema
-En las escuelas de zonas marginadas y de bajos recursos de México, los docentes a menudo carecen de tiempo y recursos para ofrecer una retroalimentación personalizada y oportuna a cada uno de sus alumnos. Esta falta de apoyo individualizado puede dificultar el aprendizaje y la comprensión, lo que agrava la desigualdad educativa. 💔
+🧐 The Problem
+In schools in marginalized and low-resource areas, teachers often lack the time and resources to offer personalized and timely feedback to each of their students. This lack of individualized support can hinder learning and understanding, which exacerbates educational inequality. 💔
 
-💡 Nuestra Solución
-Hemos desarrollado una aplicación móvil con las siguientes características:
+💡 Our Solution
+We have developed a mobile application with the following features:
 
-Retroalimentación Multimodal: Los alumnos pueden enviar sus trabajos a través de texto ✍️ o imágenes 📸 (fotos de sus cuadernos, dibujos, diagramas) y la IA les proporciona una retroalimentación constructiva.
+Multimodal Feedback: Students can submit their work via text ✍️ or images 📸 (photos of their notebooks, drawings, diagrams) and the AI provides them with constructive feedback.
 
-Funcionamiento Offline: La app está diseñada para funcionar sin necesidad de conexión a internet, lo que la hace ideal para zonas con conectividad limitada. 📶
+Offline Operation: The app is designed to work without an internet connection, making it ideal for areas with limited connectivity. 📶
 
-Aprendizaje Alineado con la NEM y LTG: El modelo de IA ha sido entrenado con los principios pedagógicos de la NEM y con el contenido de los LTG, asegurando que la retroalimentación sea relevante y precisa. 📚
+Learning Aligned with NEM and LTG: The AI model has been trained on the pedagogical principles of NEM and the content of the LTG, ensuring that the feedback is relevant and accurate. 📚
 
-Tutor Personalizado en el Bolsillo: La IA no solo corrige, sino que guía al alumno a comprender sus errores y a mejorar, actuando como un tutor personal accesible en todo momento. 🤖
+Personalized Tutor in Your Pocket: The AI not only corrects, but also guides the student to understand their mistakes and to improve, acting as an accessible personal tutor at all times. 🤖
 
-⚙️ Cómo Funciona
-Nuestro proyecto está construido sobre una arquitectura robusta que combina lo mejor de la inteligencia artificial moderna:
+⚙️ How It Works
+Our project is built on a robust architecture that combines the best of modern artificial intelligence:
 
-Modelo Base: Utilizamos Gemma 3n, un modelo de IA multimodal de Google, optimizado para correr en dispositivos móviles.
+Base Model: We use Gemma 3n, a multimodal AI model from Google, optimized to run on mobile devices.
 
-Fine-tuning Eficiente: A través del framework Unsloth, hemos logrado afinar Gemma 3n de manera rápida y con un uso mínimo de memoria. ⚡
+Efficient Fine-tuning: Through the Unsloth framework, we have managed to fine-tune Gemma 3n quickly and with minimal memory usage. ⚡
 
-Conjunto de Datos de Entrenamiento (Dataset):
+Training Dataset:
 
-Contenido: El modelo fue entrenado con un corpus de datos que incluye los documentos oficiales de la Nueva Escuela Mexicana y el contenido completo de los Libros de Texto Gratuitos.
+Content: The model was trained with a data corpus that includes the official documents of the Nueva Escuela Mexicana and the complete content of the Libros de Texto Gratuitos.
 
-Generación de Datos Sintéticos: Para superar la escasez de trabajos reales y garantizar la privacidad, hemos utilizado el Synthetic Data Kit (SDK) de Meta Llama para generar miles de ejemplos sintéticos de trabajos de alumnos y sus retroalimentaciones ideales. 🤖
+Synthetic Data Generation: To overcome the scarcity of real assignments and ensure privacy, we have used Meta Llama's Synthetic Data Kit (SDK) to generate thousands of synthetic examples of student work and their ideal feedback. 🤖
 
-Flujo de Usuario:
+User Flow:
 
-El alumno sube una imagen o escribe su pregunta.
+The student uploads an image or writes their question.
 
-El modelo en el dispositivo analiza la entrada.
+The on-device model analyzes the input.
 
-Genera una respuesta en texto, que luego es convertida a voz mediante el motor de Text-to-Speech (TTS) nativo del celular. 🗣️
+It generates a text response, which is then converted to speech using the phone's native Text-to-Speech (TTS) engine. 🗣️
 
-La app también puede analizar el historial de chats para identificar brechas de conocimiento y generar un plan de estudio personalizado. 🧠
+The app can also analyze the chat history to identify knowledge gaps and generate a personalized study plan. 🧠
 
-🛠️ Tecnologías Utilizadas
-Modelo de IA: Gemma 3n (Google)
+Usage instructions:
 
-Optimización y Fine-tuning: Unsloth
+Download the fine-tuned model to the mobile device
 
-Generación de Datos Sintéticos: Synthetic Data Kit (Meta Llama)
+Download the Google AI Edge Gallery APK
 
-Frameworks de Inferencia en Dispositivo: TensorFlow Lite / ONNX Runtime
+Load the fine-tuned model
 
-Plataformas de Desarrollo: Android / iOS
+Load the system prompts as the first instruction in the chat section
 
-Prototipo de UI/UX: Figma
+Ask the questions
 
-🎥 Demo y Presentación
-Te invitamos a ver el video de nuestra demostración para ver el proyecto en acción. ¡No te lo pierdas! 😉
+🛠️ Technologies Used
+AI Model: Gemma 3n (Google)
 
-[Enlace al video de la demo en YouTube/Vimeo]
+Optimization and Fine-tuning: Unsloth
 
-🚀 Futuro y Escalabilidad
-Este proyecto es una prueba de concepto con un enorme potencial de crecimiento para abordar desafíos educativos aún mayores. Nuestras ideas a futuro incluyen:
+Synthetic Data Generation: Synthetic Data Kit (Meta Llama)
 
-Integración en Plataformas Educativas: Expandir la aplicación más allá del dispositivo del alumno, integrándola en plataformas y sistemas de gestión de aprendizaje (LMS) utilizados por las escuelas. 🌐
+On-Device Inference Frameworks: TensorFlow Lite / ONNX Runtime
 
-Herramienta para el Docente: Desarrollar un panel de control para docentes que les permita visualizar las brechas de conocimiento comunes, analizar el progreso y obtener sugerencias de actividades basadas en la NEM. 👩‍🏫
+Development Platforms: Android / iOS
 
-Traducción a Lengua de Señas Mexicana (LSM): Aprovechar las capacidades multimodales de la IA para traducir la retroalimentación de texto a un avatar que gesticule en LSM, haciendo la educación más accesible para alumnos con discapacidad auditiva. 🤟
+UI/UX Prototype: Figma
 
-Contenido Interdisciplinario: Expandir el fine-tuning para cubrir la totalidad de los campos formativos de la NEM, promoviendo el pensamiento interdisciplinario y la conexión entre diferentes materias. 🧩
+🎥 Demo and Presentation
+We invite you to watch the video of our demo to see the project in action. Don't miss it! 😉
 
-Comunidad y Colaboración: Crear una plataforma para que los docentes compartan sus propios ejemplos de retroalimentación y materiales, enriqueciendo el corpus de entrenamiento y adaptando la IA a diversas metodologías pedagógicas. 🤝
+[Link to the demo video on YouTube/Vimeo]
 
-Nuestro objetivo final es ofrecer una herramienta que sirva como un verdadero motor de equidad educativa, adaptándose a las necesidades de cada alumno y empoderando a los docentes en todo el país. 💪
+🚀 Future and Scalability
+This project is a proof of concept with enormous growth potential to address even greater educational challenges. Our future ideas include:
 
-🤝 Contribuciones
-Este proyecto fue desarrollado por Equipo Temachtiani para el Google Gemma 3n Hackathon en Kaggle. ¡Gracias por el apoyo!
+UI Development: An APK will be created based on Google AI Edge Gallery to provide a more user-friendly interface.
+
+Integration into Educational Platforms: Expand the application beyond the student's device, integrating it into learning management systems (LMS) and platforms used by schools. 🌐
+
+Tool for the Teacher: Develop a control panel for teachers that allows them to visualize common knowledge gaps, analyze progress, and get suggestions for activities based on the NEM. 👩‍🏫
+
+Translation to Mexican Sign Language (LSM): Leverage the multimodal capabilities of the AI to translate text feedback into an avatar that signs in LSM, making education more accessible for students with hearing disabilities. 🤟
+
+Interdisciplinary Content: Expand the fine-tuning to cover all the formative fields of the NEM, promoting interdisciplinary thinking and the connection between different subjects. 🧩
+
+Community and Collaboration: Create a platform for teachers to share their own examples of feedback and materials, enriching the training corpus and adapting the AI to various pedagogical methodologies. 🤝
+
+Our ultimate goal is to offer a tool that serves as a true driver of educational equity, adapting to the needs of each student and empowering teachers nationwide. 💪
+
+🤝 Contributions
+This project was developed by Equipo Temachtiani for the Google Gemma 3n Hackathon on Kaggle. Thank you for the support!
 
 📄 Licencia
 Licencia MIT
