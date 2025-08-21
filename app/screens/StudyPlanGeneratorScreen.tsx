@@ -1,19 +1,22 @@
 import ThemedButton from '@components/buttons/ThemedButton'
-import ThemedTextInput from '@components/input/ThemedTextInput'
 import HeaderTitle from '@components/views/HeaderTitle'
 import { Chats } from '@lib/state/Chat'
 import { Theme } from '@lib/theme/ThemeManager'
 import React, { useState } from 'react'
-import { ActivityIndicator, ScrollView, Text, View } from 'react-native'
+import { ActivityIndicator, ScrollView, Text, View, Modal, TouchableOpacity } from 'react-native'
 import { useStudyPlanGenerator } from '@lib/engine/StudyPlanGenerator'
 import { StudyPlans } from '@lib/state/StudyPlans'
 import { useRouter } from 'expo-router'
+import { Calendar } from 'react-native-calendars'
 
 const StudyPlanGeneratorScreen = () => {
     const { spacing, color } = Theme.useTheme()
     const router = useRouter()
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const [isCalendarVisible, setCalendarVisible] = useState(false)
+    const [dateType, setDateType] = useState<'start' | 'end'>('start')
+
     const {
         generatedPlan,
         loading,
@@ -34,19 +37,7 @@ const StudyPlanGeneratorScreen = () => {
 
             const chats = await Chats.db.query.chatsBetween(start, end)
 
-            const formattedChats = chats
-                .map((chat) => {
-                    const messages = chat.messages
-                        .map((message) => {
-                            const swipe = message.swipes[message.swipe_id]
-                            return `${message.name}: ${swipe.swipe}`
-                        })
-                        .join('\n')
-                    return `Chat: ${chat.name}\n${messages}`
-                })
-                .join('\n\n---\n\n')
-
-            await generate(formattedChats)
+            await generate(chats)
         } catch (error) {
             console.error(error)
             // TODO: Show error to user
@@ -62,6 +53,24 @@ const StudyPlanGeneratorScreen = () => {
         }
     }
 
+    const onDayPress = (day) => {
+        const selectedDate = day.dateString
+        if (dateType === 'start') {
+            setStartDate(selectedDate)
+        } else {
+            setEndDate(selectedDate)
+        }
+        setCalendarVisible(false)
+    }
+
+    const setDateRange = (days) => {
+        const start = new Date()
+        const end = new Date()
+        end.setDate(start.getDate() + days)
+        setStartDate(start.toISOString().split('T')[0])
+        setEndDate(end.toISOString().split('T')[0])
+    }
+
     return (
         <ScrollView>
             <View
@@ -72,24 +81,68 @@ const StudyPlanGeneratorScreen = () => {
                 }}>
                 <HeaderTitle title="Crear Plan de Estudios" />
 
-                <ThemedTextInput
-                    title="Fecha de Inicio"
-                    placeholder="YYYY-MM-DD"
-                    value={startDate}
-                    onChangeText={setStartDate}
-                />
+                <TouchableOpacity onPress={() => { setDateType('start'); setCalendarVisible(true); }}>
+                    <Text style={{ color: color.text._100, marginBottom: spacing.sm }}>Fecha de Inicio</Text>
+                    <View style={{ borderWidth: 1, borderColor: color.neutral._500, padding: spacing.md, borderRadius: 8 }}>
+                        <Text style={{ color: color.text._100 }}>{startDate || 'YYYY-MM-DD'}</Text>
+                    </View>
+                </TouchableOpacity>
 
-                <ThemedTextInput
-                    title="Fecha de Fin"
-                    placeholder="YYYY-MM-DD"
-                    value={endDate}
-                    onChangeText={setEndDate}
-                />
+                <TouchableOpacity onPress={() => { setDateType('end'); setCalendarVisible(true); }}>
+                    <Text style={{ color: color.text._100, marginBottom: spacing.sm }}>Fecha de Fin</Text>
+                    <View style={{ borderWidth: 1, borderColor: color.neutral._500, padding: spacing.md, borderRadius: 8 }}>
+                        <Text style={{ color: color.text._100 }}>{endDate || 'YYYY-MM-DD'}</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginVertical: spacing.md }}>
+                    <ThemedButton label="1 Semana" onPress={() => setDateRange(7)} />
+                    <ThemedButton label="15 Días" onPress={() => setDateRange(15)} />
+                    <ThemedButton label="1 Mes" onPress={() => setDateRange(30)} />
+                </View>
+
+                <Modal
+                    transparent={true}
+                    visible={isCalendarVisible}
+                    onRequestClose={() => setCalendarVisible(false)}>
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                        <View style={{ backgroundColor: color.neutral._800, borderRadius: 8, padding: spacing.md }}>
+                            <Calendar
+                                onDayPress={onDayPress}
+                                markedDates={{
+                                    [startDate]: { selected: true, marked: true, selectedColor: color.primary._500 },
+                                    [endDate]: { selected: true, marked: true, selectedColor: color.primary._500 }
+                                }}
+                                theme={{
+                                    backgroundColor: color.neutral._800,
+                                    calendarBackground: color.neutral._800,
+                                    textSectionTitleColor: color.text._100,
+                                    selectedDayBackgroundColor: color.primary._500,
+                                    selectedDayTextColor: '#ffffff',
+                                    todayTextColor: color.primary._500,
+                                    dayTextColor: color.text._100,
+                                    textDisabledColor: color.neutral._500,
+                                    dotColor: color.primary._500,
+                                    selectedDotColor: '#ffffff',
+                                    arrowColor: color.primary._500,
+                                    monthTextColor: color.primary._500,
+                                    indicatorColor: color.primary._500,
+                                    textDayFontWeight: '300',
+                                    textMonthFontWeight: 'bold',
+                                    textDayHeaderFontWeight: '300',
+                                    textDayFontSize: 16,
+                                    textMonthFontSize: 16,
+                                    textDayHeaderFontSize: 16
+                                }}
+                            />
+                        </View>
+                    </View>
+                </Modal>
 
                 {loading ? (
                     <ActivityIndicator size="large" color={color.primary._500} />
                 ) : (
-                    <ThemedButton text="Generar Plan" onPress={handleGeneratePlan} />
+                    <ThemedButton label="Generar Plan" onPress={handleGeneratePlan} />
                 )}
 
                 {generatedPlan ? (
@@ -105,7 +158,7 @@ const StudyPlanGeneratorScreen = () => {
                             }}>
                             <Text style={{ color: color.text._100 }}>{generatedPlan}</Text>
                         </View>
-                        <ThemedButton text="Guardar Plan" onPress={handleSavePlan} />
+                        <ThemedButton label="Guardar Plan" onPress={handleSavePlan} />
                     </View>
                 ) : null}
             </View>
