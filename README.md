@@ -1,138 +1,96 @@
-# ChatterUI - A simple app for LLMs
+🚀 Project Name: Open Tutor AI
+✨ Project Description
+This project is an artificial intelligence app that seeks to revolutionize educational feedback in basic education. Using the power of Google's Gemma 3n multimodal model, the model offers students a personalized tutor that works directly on their mobile devices, currently using Google AI Edge Gallery. 📱
 
-ChatterUI is a native mobile frontend for LLMs.
+Our solution aligns with and deepens the principles of expected learning outcomes for basic education, providing a tool that promotes autonomous learning and addresses the educational gap in low-resource areas. 🏫
 
-Run LLMs on device or connect to various commercial or open source APIs. ChatterUI aims to provide a mobile-friendly interface with fine-grained control over chat structuring.
+🧐 The Problem
+In schools in marginalized and low-resource areas, teachers often lack the time and resources to offer personalized and timely feedback to each of their students. This lack of individualized support can hinder learning and understanding, which exacerbates educational inequality. 💔
 
-If you like the app, feel free support me here:
+💡 Our Solution
+We have developed a mobile application with the following features:
 
-<a href='https://ko-fi.com/W7W7X8T7W' target='_blank'><img height='42' style='border:0px;height:42px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+Multimodal Feedback: Students can submit their work via text ✍️ or images 📸 (photos of their notebooks, drawings, diagrams) and the AI provides them with constructive feedback.
 
-<div>
-Chat With Characters or Assistants
-<br/>
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/characterlist.png" width="150" > 
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/chat.png" width="150" > 
-<br/>
-Use on-device Models or APIs
-<br/>
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/models.png" width="150" > 
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/api.png" width="150" > 
-<br/>
-Modify And Customize
-<br/>
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/charactereditor.png" width="150" > 
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/settings.png" width="150" >
-<br/>
-Personalize Yourself
-<br/>
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/usereditor.png" width="150" > 
-<img src ="https://github.com/Vali-98/ChatterUI/blob/master/assets/screenshots/userlist.png" width="150" >
-</div>
+Offline Operation: The app is designed to work without an internet connection, making it ideal for areas with limited connectivity. 📶
 
-## Features:
+Learning Aligned with NEM and LTG: The AI model has been trained on the pedagogical principles of NEM and the content of the LTG, ensuring that the feedback is relevant and accurate. 📚
 
--   Run LLMs on-device in Local Mode
--   Connect to various APIs in Remote Mode
--   Chat with characters. (Supports the Character Card v2 specification.)
--   Create and manage multiple chats per character.
--   Customize Sampler fields and Instruct formatting
--   Integrates with your device’s text-to-speech (TTS) engine
+Personalized Tutor in Your Pocket: The AI not only corrects, but also guides the student to understand their mistakes and to improve, acting as an accessible personal tutor at all times. 🤖
 
-<br/>
+⚙️ How It Works
+Our project is built on a robust architecture that combines the best of modern artificial intelligence:
 
-# Usage
+Base Model: We use Gemma 3n, a multimodal AI model from Google, optimized to run on mobile devices.
 
-Download and install latest APK from the [releases](https://github.com/Vali-98/ChatterUI/releases/latest) page.
+Efficient Fine-tuning: Through the Unsloth framework, we have managed to fine-tune Gemma 3n quickly and with minimal memory usage. ⚡
 
-<i>iOS is Currently unavailable due to lacking iOS hardware for development</i>
+Training Dataset:
 
-## Local Mode
+Content: The model was trained with a data corpus that includes the official documents of the Nueva Escuela Mexicana and the complete content of the Libros de Texto Gratuitos.
 
-ChatterUI uses a [llama.cpp](https://github.com/ggerganov/llama.cpp) under the hood to run gguf files on device. A custom adapter is used to integrate with react-native: [cui-llama.rn](https://github.com/Vali-98/cui-llama.rn)
+Synthetic Data Generation: To overcome the scarcity of real assignments and ensure privacy, we have used Meta Llama's Synthetic Data Kit (SDK) to generate thousands of synthetic examples of student work and their ideal feedback. 🤖
 
-To use on-device inferencing, first enable Local Mode, then go to Models > Import Model / Use External Model and choose a gguf model that can fit on your device's memory. The importing functions are as follows:
+User Flow:
 
--   Import Model: Copies the model file into ChatterUI, potentially speeding up startup time.
--   Use External Model: Uses a model from your device storage directly, removing the need to copy large files into ChatterUI but with a slight delay in load times.
+The student uploads an image or writes their question.
 
-After that, you can load the model and begin chatting!
+The on-device model analyzes the input.
 
-_Note: For devices with Snapdragon 8 Gen 1 and above or Exynos 2200+, it is recommended to use the Q4_0 quantization for optimized performance._
+It generates a text response, which is then converted to speech using the phone's native Text-to-Speech (TTS) engine. 🗣️
 
-## Remote Mode
+The app can also analyze the chat history to identify knowledge gaps and generate a personalized study plan. 🧠
 
-Remote Mode allows you to connect to a few common APIs from both commercial and open source projects.
+Usage instructions:
 
-### Open Source Backends:
+Download the fine-tuned model to the mobile device
 
--   koboldcpp
--   text-generation-webui
--   Ollama
+Download the Google AI Edge Gallery APK
 
-### Dedicated API:
+Load the fine-tuned model
 
--   OpenAI
--   Claude _(with ability to use a proxy)_
--   Cohere
--   Open Router
--   Mancer
--   AI Horde
+Load the system prompts as the first instruction in the chat section
 
-### Generic backends:
+Ask the questions
 
--   Generic Text Completions
--   Generic Chat Completions
+🛠️ Technologies Used
+AI Model: Gemma 3n (Google)
 
-_These should be compliant with any Text Completion/Chat Completion backends such as Groq or Infermatic._
+Optimization and Fine-tuning: Unsloth
 
-### Custom APIs:
+Synthetic Data Generation: Synthetic Data Kit (Meta Llama)
 
-Is your API provider missing? ChatterUI allows you to define APIs using its template system.
+On-Device Inference Frameworks: TensorFlow Lite / ONNX Runtime
 
-Read more about it [here!](https://github.com/Vali-98/ChatterUI/discussions/126)
+Development Platforms: Android / iOS
 
-## Development
+UI/UX Prototype: Figma
 
-### Android
+🎥 Demo and Presentation
+We invite you to watch the video of our demo to see the project in action. Don't miss it! 😉
 
-To run a development build, follow these simple steps:
+[Link to the demo video on YouTube/Vimeo]
 
--   Install any Java 17/21 SDK of your choosing
--   Install `android-sdk` via `Android Studio`
--   Clone the repo:
+🚀 Future and Scalability
+This project is a proof of concept with enormous growth potential to address even greater educational challenges. Our future ideas include:
 
-```
-git clone https://github.com/Vali-98/ChatterUI.git
-```
+UI Development: An APK will be created based on Google AI Edge Gallery to provide a more user-friendly interface.
 
--   Install dependencies via npm and run via Expo:
+Integration into Educational Platforms: Expand the application beyond the student's device, integrating it into learning management systems (LMS) and platforms used by schools. 🌐
 
-```
-npm install
-npx expo run:android
-```
+Tool for the Teacher: Develop a control panel for teachers that allows them to visualize common knowledge gaps, analyze progress, and get suggestions for activities based on the NEM. 👩‍🏫
 
-#### Building an APK
+Translation to Mexican Sign Language (LSM): Leverage the multimodal capabilities of the AI to translate text feedback into an avatar that signs in LSM, making education more accessible for students with hearing disabilities. 🤟
 
-Requires Node.js, Java 17/21 SDK and Android SDK. Expo uses EAS to build apps which requires a Linux environment.
+Interdisciplinary Content: Expand the fine-tuning to cover all the formative fields of the NEM, promoting interdisciplinary thinking and the connection between different subjects. 🧩
 
-1. Clone the repo.
-2. Rename the `eas.json.example` to `eas.json`.
-3. Modify `"ANDROID_SDK_ROOT"` to the directory of your Android SDK
-4. Run the following:
+Community and Collaboration: Create a platform for teachers to share their own examples of feedback and materials, enriching the training corpus and adapting the AI to various pedagogical methodologies. 🤝
 
-```
-npm install
-eas build --platform android --local
-```
+Our ultimate goal is to offer a tool that serves as a true driver of educational equity, adapting to the needs of each student and empowering teachers nationwide. 💪
 
-### IOS
-
-Currently in development
-
-## Acknowledgement
-
--   [llama.cpp](https://github.com/ggerganov/llama.cpp) - the underlying engine to run LLMs
--   [llama.rn](https://github.com/mybigday/llama.rn) - the original react-native llama.cpp adapter
+🤝 Contributions
+This project was developed by Emiliano Dorantes & Karen Espinosa
+Especial agradecimiento por sus contribuciones a la comunidad: 
+**unsloth:** https://github.com/unslothai/unsloth
+**ChatterUI:** https://github.com/Vali-98/ChatterUI 
 
