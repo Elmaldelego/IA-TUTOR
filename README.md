@@ -93,6 +93,7 @@ Our ultimate goal is to offer a tool that serves as a true driver of educational
 
 🤝 Contributions
 This project was developed by Emiliano Dorantes & Karen Espinosa
+
 Especial agradecimiento por sus contribuciones a la comunidad: 
 **unsloth:** https://github.com/unslothai/unsloth
 **ChatterUI:** https://github.com/Vali-98/ChatterUI 
