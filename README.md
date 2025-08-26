@@ -1,8 +1,11 @@
-🚀 Project Name: Open Tutor AI
+🚀 **Project Name: Open Tutor AI**
 ✨ Project Description
 This project is an artificial intelligence app that seeks to revolutionize educational feedback in basic education. Using the power of Google's Gemma 3n multimodal model, the model offers students a personalized tutor that works directly on their mobile devices, currently using Google AI Edge Gallery. 📱
 
 Our solution aligns with and deepens the principles of expected learning outcomes for basic education, providing a tool that promotes autonomous learning and addresses the educational gap in low-resource areas. 🏫
+If you like the app, feel free support me here:
+
+<a href='https://ko-fi.com/emilianodorantes' target='_blank'><img height='42' style='border:0px;height:42px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 🧐 The Problem
 In schools in marginalized and low-resource areas, teachers often lack the time and resources to offer personalized and timely feedback to each of their students. This lack of individualized support can hinder learning and understanding, which exacerbates educational inequality. 💔
