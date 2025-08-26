@@ -49,3 +49,10 @@ yarn-error.*
 
 expo-env.d.ts
 # @end expo-cli
+
+# Archivos y carpetas de Windows
+.DS_Store
+Thumbs.db
+
+# Archivos temporales del sistema (específicos del error)
+AppData/

@@ -11,10 +11,10 @@ const SupportButton = () => {
     return (
         <ThemedButton
             onPress={() => {
-                Linking.openURL('https://ko-fi.com/vali98')
+                Linking.openURL('https://Ko-fi.com/emilianodorantes')
             }}
             variant="secondary"
-            label="Support ChatterUI"
+            label="Donar Open Tutor IA"
             icon={<FontAwesome name="coffee" size={16} color={theme.color.primary._700} />}
         />
     )

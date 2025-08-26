@@ -116,24 +116,19 @@ Mantén un tono motivador y claro.
         const messages = sanitizeMessages(chats, system_prompt);
 
         if (appMode === 'local') {
-            const stop = () => get().stopGenerating()
-            const onData = (data: string) => {
-                set((state) => ({ generatedPlan: state.generatedPlan + data }))
-            }
-            const onEnd = () => {
-                set({ loading: false })
-            }
-
             try {
-                await localInference({
-                    messages: messages,
-                    onData: onData,
-                    onEnd: onEnd,
-                    stop: stop,
-                })
+                await localInference(
+                    (data) => {
+                        set((state) => ({ generatedPlan: state.generatedPlan + data }))
+                    },
+                    () => {
+                        set({ loading: false })
+                    },
+                    () => get().stopGenerating()
+                )
             } catch (e) {
                 Logger.errorToast('Error during local inference: ' + e)
-                stop()
+                get().stopGenerating()
             }
 
         } else {

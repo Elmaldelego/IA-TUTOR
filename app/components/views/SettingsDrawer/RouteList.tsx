@@ -64,6 +64,7 @@ const useStyles = () => {
             paddingVertical: spacing.l,
             paddingLeft: spacing.xl,
             color: color.text._100,
+            flex: 1,
         },
 
         largeButton: {
@@ -76,12 +77,23 @@ const useStyles = () => {
 
 const getPaths = (remote: boolean): ButtonData[] => [
     {
-        name: 'Sampler',
+        name: 'Crear Plan de\nEstudios',
+        path: '/screens/StudyPlanGeneratorScreen',
+        icon: 'pluscircleo',
+    },
+    {
+        name: 'Mis Planes de\nEstudio',
+        path: '/screens/StudyPlanListScreen',
+        icon: 'book',
+    },
+
+    {
+        name: 'Tutores',
         path: '/screens/SamplerManagerScreen',
         icon: 'barschart',
     },
     {
-        name: 'Formatting',
+        name: 'Formato',
         path: '/screens/FormattingManagerScreen',
         icon: 'profile',
     },
@@ -92,27 +104,22 @@ const getPaths = (remote: boolean): ButtonData[] => [
               icon: 'link',
           }
         : {
-              name: 'Models',
+              name: 'Modelos',
               path: '/screens/ModelManagerScreen',
               icon: 'folderopen',
           },
-    {
-        name: 'TTS',
-        path: '/screens/TTSManagerScreen',
-        icon: 'sound',
-    },
     {
         name: 'Logs',
         path: '/screens/LogsScreen',
         icon: 'codesquareo',
     },
     {
-        name: 'About',
+        name: 'Acerca de',
         path: '/screens/AboutScreen',
         icon: 'infocirlceo',
     },
     {
-        name: 'Settings',
+        name: 'Ajustes',
         path: '/screens/AppSettingsScreen',
         icon: 'setting',
     },

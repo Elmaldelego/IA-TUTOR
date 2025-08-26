@@ -54,8 +54,8 @@ const ChatBubble: React.FC<ChatTextProps> = ({
                     setShowOptions(activeIndex === index || nowGenerating ? undefined : index)
                 }}
                 style={{
-                    backgroundColor: color.neutral._200,
-                    borderColor: color.neutral._200,
+                    backgroundColor: message.is_user ? color.user._200 : color.llm._200,
+                    borderColor: message.is_user ? color.user._200 : color.llm._200,
                     borderWidth: 1,
                     paddingVertical: spacing.sm,
                     paddingHorizontal: spacing.m,

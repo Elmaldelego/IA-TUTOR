@@ -65,13 +65,13 @@ const SamplerManagerScreen = () => {
             `${currentConfig.name}.json`,
             'utf8'
         ).then(() => {
-            Logger.infoToast('Downloaded Sampler Configuration!')
+            Logger.infoToast('¡Configuración de profesor descargada!')
         })
     }
 
     const handleImportSampler = () => {
         //TODO : Implement
-        Logger.errorToast('Importing Not Implemented')
+        Logger.errorToast('Importación no implementada')
     }
 
     const handleDeleteSampler = () => {
@@ -81,12 +81,12 @@ const SamplerManagerScreen = () => {
         }
 
         Alert.alert({
-            title: `Delete Sampler`,
-            description: `Are you sure you want to delete '${currentConfig.name}'?`,
+            title: `Eliminar Profesor`,
+            description: `¿Estás seguro de que quieres eliminar '${currentConfig.name}'?`,
             buttons: [
-                { label: 'Cancel' },
+                { label: 'Cancelar' },
                 {
-                    label: 'Delete Sampler',
+                    label: 'Eliminar Profesor',
                     onPress: async () => {
                         deleteSamplerConfig(currentConfigIndex)
                     },
@@ -106,7 +106,7 @@ const SamplerManagerScreen = () => {
             placement="bottom"
             options={[
                 {
-                    label: 'Create Sampler',
+                    label: 'Crear Profesor',
                     icon: 'addfile',
                     onPress: (menu) => {
                         setShowNewSampler(true)
@@ -114,7 +114,7 @@ const SamplerManagerScreen = () => {
                     },
                 },
                 {
-                    label: 'Export Sampler',
+                    label: 'Exportar Profesor',
                     icon: 'download',
                     onPress: (menu) => {
                         handleExportSampler()
@@ -130,7 +130,7 @@ const SamplerManagerScreen = () => {
                     },
                 },*/
                 {
-                    label: 'Delete Sampler',
+                    label: 'Eliminar Profesor',
                     icon: 'delete',
                     onPress: (menu) => {
                         if (handleDeleteSampler()) menu.current?.close()
@@ -147,20 +147,20 @@ const SamplerManagerScreen = () => {
                 booleans={[showNewSampler, setShowNewSampler]}
                 onConfirm={(text: string) => {
                     if (text === '') {
-                        Logger.errorToast(`Sampler name cannot be empty`)
+                        Logger.errorToast(`El nombre del Profesor no puede estar vacío`)
                         return
                     }
 
                     for (const item of configList)
                         if (item.name === text) {
-                            Logger.errorToast(`Sampler name already exists.`)
+                            Logger.errorToast(`El nombre del Profesor ya existe.`)
                             return
                         }
                     addSamplerConfig({ name: text, data: currentConfig.data })
                 }}
             />
 
-            <HeaderTitle title="Samplers" />
+            <HeaderTitle title="Profesores" />
             <HeaderButton headerRight={headerRight} />
 
             <DropdownSheet
@@ -186,7 +186,7 @@ const SamplerManagerScreen = () => {
                         if (!samplerItem)
                             return (
                                 <Text style={styles.unsupported}>
-                                    Sampler ID {`[${item.samplerID}]`} Not Supported
+                                    Sampler ID {`[${item.samplerID}]`} no compatible
                                 </Text>
                             )
                         switch (samplerItem.inputType) {
@@ -253,7 +253,7 @@ const SamplerManagerScreen = () => {
                             //case 'custom':
                             default:
                                 return (
-                                    <Text style={styles.warningText}>Invalid Sampler Field!</Text>
+                                    <Text style={styles.warningText}>¡Campo de muestreador no válido!</Text>
                                 )
                         }
                     })}
@@ -267,10 +267,10 @@ const SamplerManagerScreen = () => {
                         justifyContent: 'center',
                         rowGap: 12,
                     }}>
-                    <Text style={styles.noSamplersText}>No Samplers to Configure</Text>
+                    <Text style={styles.noSamplersText}>No hay muestreadores para configurar</Text>
                     {appMode === 'remote' && (
                         <Text style={styles.noSamplersText}>
-                            You probably haven't added an API connection yet
+                            Probablemente aún no has añadido una conexión API
                         </Text>
                     )}
                 </View>

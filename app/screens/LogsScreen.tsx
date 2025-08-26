@@ -27,19 +27,19 @@ const LogsScreen = () => {
             .join('\n')
         saveStringToDownload(data, `logs-chatterui-${Date.now()}.txt`, 'utf8')
             .then(() => {
-                Logger.infoToast('Logs Downloaded!')
+                Logger.infoToast('¡Registros Descargados!')
             })
             .catch((e) => {
-                Logger.errorToast(`Could Not Export Logs: ${e}`)
+                Logger.errorToast(`No se pudieron exportar los registros: ${e}`)
             })
     }
 
     const handleFlushLogs = () => {
         Alert.alert({
-            title: `Delete Logs`,
-            description: `Are you sure you want to delete all logs? This cannot be undone.`,
+            title: `Eliminar Registros`,
+            description: `¿Estás seguro de que quieres eliminar todos los registros? Esto no se puede deshacer.`,
             buttons: [
-                { label: 'Cancel' },
+                { label: 'Cancelar' },
                 {
                     label: 'Delete Logs',
                     onPress: async () => {
@@ -64,7 +64,7 @@ const LogsScreen = () => {
             icon="setting"
             options={[
                 {
-                    label: 'Export Logs',
+                    label: 'Exportar Registros',
                     icon: 'export',
                     onPress: (m) => {
                         handleExportLogs()
@@ -72,7 +72,7 @@ const LogsScreen = () => {
                     },
                 },
                 {
-                    label: 'Flush Logs',
+                    label: 'Vaciar Registros',
                     icon: 'delete',
                     onPress: (m) => {
                         handleFlushLogs()
@@ -90,7 +90,7 @@ const LogsScreen = () => {
             style={{
                 flex: 1,
             }}>
-            <HeaderTitle title="Logs" />
+            <HeaderTitle title="Registros" />
             <HeaderButton headerRight={headerRight} />
             <View
                 style={{

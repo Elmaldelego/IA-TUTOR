@@ -214,6 +214,15 @@ const setCPUThreads = () => {
     mmkv.set(Global.CPUThreads, newThreads)
 }
 
+const loadModelsOnStartup = async () => {
+    const lastModel = Llama.useLlamaPreferencesStore.getState().lastModelLoaded
+    if (!lastModel) return
+    Logger.info(`Attempting to load model: ${lastModel.name}`)
+    await Llama.useLlamaModelStore.getState().load(lastModel).catch((e) => {
+        Logger.error(`Failed to load model on startup: ${e}`)
+    })
+}
+
 export const startupApp = () => {
     console.log('[APP STARTED]: T1APT')
     // DEV: Needed for Reset
@@ -245,6 +254,7 @@ export const startupApp = () => {
     // Local Model Data in case external models are deleted
     Model.verifyModelList()
     Tokenizer.useTokenizerState.getState().loadModel()
+    loadModelsOnStartup()
     // migrations for old versions
     migrateModelData_0_7_10_to_0_8_0()
     migrateModelData_0_8_4_to_0_8_5()

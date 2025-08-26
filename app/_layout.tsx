@@ -37,6 +37,7 @@ const Layout = () => {
                             statusBarStyle: 'auto',
                         }}>
                         <Stack.Screen name="index" options={{ animation: 'fade' }} />
+                        <Stack.Screen name="screens/StudyPlanGeneratorScreen" options={{ title: 'Generar Plan de Estudios' }} />
                     </Stack>
                 </KeyboardProvider>
             </MenuProvider>

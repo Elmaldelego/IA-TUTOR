@@ -16,12 +16,12 @@ const CharacterSettings = () => {
                 variant="secondary"
                 onPress={() => {
                     Alert.alert({
-                        title: `Regenerate Default Card`,
-                        description: `This will add the default AI Bot card to your character list.`,
+                        title: `Regenerar Tarjeta por Defecto`,
+                        description: `Esto agregará la tarjeta de Tutor de Estudio a tu lista de personajes.`,
                         buttons: [
-                            { label: 'Cancel' },
+                            { label: 'Cancelar' },
                             {
-                                label: 'Create Default Card',
+                                label: 'Crear Tarjeta por Defecto',
                                 onPress: async () => await Characters.createDefaultCard(),
                             },
                         ],

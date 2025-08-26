@@ -2,13 +2,13 @@ const IS_DEV = process.env.APP_VARIANT === 'development'
 
 module.exports = {
     expo: {
-        name: IS_DEV ? 'ChatterUI (DEV)' : 'ChatterUI',
+        name: IS_DEV ? 'OPEN TUTOR IA (DEV)' : 'OPEN TUTOR IA',
         newArchEnabled: true,
         slug: 'open-tutor-ia',
-        version: '0.8.8-beta1',
+        version: '0.1.0-beta',
         orientation: 'default',
         icon: './assets/images/icon.png',
-        scheme: 'chatterui',
+        scheme: 'opentutoria',
         userInterfaceStyle: 'automatic',
         assetBundlePatterns: ['**/*'],
         ios: {
@@ -18,8 +18,8 @@ module.exports = {
                 tinted: './assets/images/icon.png',
             },
             supportsTablet: true,
-            package: IS_DEV ? 'com.Vali98.ChatterUIDev' : 'com.Vali98.ChatterUI',
-            bundleIdentifier: IS_DEV ? 'com.Vali98.ChatterUIDev' : 'com.Vali98.ChatterUI',
+            package: IS_DEV ? 'com.Vali98.OpenTutorIADev' : 'com.Vali98.OpenTutorIA',
+            bundleIdentifier: IS_DEV ? 'com.Vali98.OpenTutorIADev' : 'com.Vali98.OpenTutorIA',
         },
         android: {
             adaptiveIcon: {
@@ -29,7 +29,7 @@ module.exports = {
                 backgroundColor: '#000',
             },
             edgeToEdgeEnabled: true,
-            package: IS_DEV ? 'com.Vali98.ChatterUIDev' : 'com.Vali98.ChatterUI',
+            package: IS_DEV ? 'com.Vali98.OpenTutorIADev' : 'com.Vali98.OpenTutorIA',
             userInterfaceStyle: 'dark',
             permissions: [
                 'android.permission.FOREGROUND_SERVICE',

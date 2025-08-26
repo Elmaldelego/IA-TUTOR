@@ -208,11 +208,15 @@ const verifyModelLoaded = async (): Promise<boolean> => {
     return true
 }
 
-export const localInference = async () => {
+export const localInference = async (
+    onData: (data: string) => void,
+    onEnd: () => void,
+    stopGeneratingCallback: () => void
+) => {
     try {
         // Model Loading Routine
         if (!(await verifyModelLoaded())) {
-            return stopGenerating()
+            return stopGeneratingCallback()
         }
 
         // verify that model has been loaded
@@ -220,7 +224,7 @@ export const localInference = async () => {
 
         if (!context) {
             Logger.warnToast('No Model Loaded')
-            stopGenerating()
+            stopGeneratingCallback()
             return
         }
 
@@ -228,7 +232,7 @@ export const localInference = async () => {
 
         if (!payload) {
             Logger.warnToast('Failed to build payload')
-            stopGenerating()
+            stopGeneratingCallback()
             return
         }
 
@@ -242,7 +246,7 @@ export const localInference = async () => {
                     title: 'Cache Mismatch',
                     description: `KV Cache does not match current prompt:\n\n${result.matchLength} of ${result.cachedLength} tokens are identical.\n\nPress 'Load Anyway' if you don't mind losing the cache.`,
                     buttons: [
-                        { label: 'Cancel', onPress: stopGenerating },
+                        { label: 'Cancel', onPress: stopGeneratingCallback },
                         {
                             label: 'Load Anyway',
                             onPress: async () => {
@@ -251,12 +255,12 @@ export const localInference = async () => {
                                 if (result) {
                                     KV.useKVStore.getState().setKvCacheLoaded(true)
                                 }
-                                runLocalCompletion(payload)
+                                runLocalCompletion(payload, onData, onEnd, stopGeneratingCallback)
                             },
                             type: 'warning',
                         },
                     ],
-                    onDismiss: stopGenerating,
+                    onDismiss: stopGeneratingCallback,
                 })
                 return
             }
@@ -266,15 +270,18 @@ export const localInference = async () => {
                 KV.useKVStore.getState().setKvCacheLoaded(true)
             }
         }
-        await runLocalCompletion(payload)
+        await runLocalCompletion(payload, onData, onEnd, stopGeneratingCallback)
     } catch (e) {
         Logger.errorToast('Failed to run local inference: ' + e)
-        stopGenerating()
+        stopGeneratingCallback()
     }
 }
 
 const runLocalCompletion = async (
-    payload: NonNullable<Awaited<ReturnType<typeof buildLocalPayload>>>
+    payload: NonNullable<Awaited<ReturnType<typeof buildLocalPayload>>>,
+    onData: (data: string) => void,
+    onEnd: () => void,
+    stopGeneratingCallback: () => void
 ) => {
     const replace = RegExp(
         constructReplaceStrings()
@@ -290,6 +297,7 @@ const runLocalCompletion = async (
     const outputStream = (text: string) => {
         Chats.useChatState.getState().insertBuffer(text)
         useTTSStore.getState().insertBuffer(text)
+        onData(text)
     }
 
     const outputCompleted = (text: string, timings: CompletionTimings) => {
@@ -299,6 +307,7 @@ const runLocalCompletion = async (
             .setBuffer({ data: (regenCache + text).replaceAll(replace, ''), timings: timings })
         if (mmkv.getBoolean(AppSettings.PrintContext)) Logger.info(`Completion Output:\n${text}`)
         stopGenerating()
+        onEnd()
     }
 
     await Llama.useLlamaModelStore
@@ -306,7 +315,7 @@ const runLocalCompletion = async (
         .completion(payload, outputStream, outputCompleted)
         .catch((error) => {
             Logger.errorToast(`Failed to generate locally: ${error}`)
-            stopGenerating()
+            stopGeneratingCallback()
         })
 }
 

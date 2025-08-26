@@ -41,11 +41,11 @@ const ModelManagerScreen = () => {
 
     const data = [
         {
-            title: 'Models',
+            title: 'Modelos',
             data: modelList,
         },
         {
-            title: 'Multimodal Adapters',
+            title: 'Adaptadores Multimodales',
             data: mmprojList,
         },
     ]
@@ -59,7 +59,7 @@ const ModelManagerScreen = () => {
                 paddingBottom: spacing.xl2,
                 flex: 1,
             }}>
-            <HeaderTitle title={showSettings ? 'Model Settings' : 'Models'} />
+            <HeaderTitle title={showSettings ? 'Configuración del Modelo' : 'Modelos'} />
             <HeaderButton
                 headerRight={() =>
                     !showSettings && (
@@ -128,7 +128,7 @@ const ModelManagerScreen = () => {
                 />
             )}
             <ThemedButton
-                label={showSettings ? 'Back To Models' : 'Show Settings'}
+                label={showSettings ? 'Volver a Modelos' : 'Mostrar Configuración'}
                 onPress={() => setShowSettings(!showSettings)}
             />
         </SafeAreaView>

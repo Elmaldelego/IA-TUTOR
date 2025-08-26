@@ -884,18 +884,28 @@ export namespace Characters {
     }
 
     export const createDefaultCard = async () => {
-        const filename = 'aibot'
-        const pngName = filename + '.png'
-        const cardDefaultDir = `${FS.documentDirectory}appAssets/${pngName}`
-
         try {
-            const fileinfo = await FS.getInfoAsync(cardDefaultDir)
-            if (!fileinfo.exists) {
-                Logger.info('Importing default card.')
-                const [asset] = await Asset.loadAsync(require('./../../assets/models/aibot.raw'))
-                if (asset.localUri) await FS.copyAsync({ from: asset.localUri, to: cardDefaultDir })
+            const characterName = "Tutor de Estudio";
+            const characterExists = await database.query.characters.findFirst({
+                where: eq(characters.name, characterName),
+            });
+
+            if (characterExists) {
+                Logger.info('El personaje "Tutor de Estudio" ya existe.');
+                return;
             }
-            await createCharacterFromImage(cardDefaultDir)
+
+            const card = createBlankV2Card(characterName, {
+                description: "Soy un tutor de IA diseñado para ayudarte a estudiar. Puedo ayudarte a crear planes de estudio, explicarte conceptos, y ponerte a prueba.",
+                first_mes: "¡Hola! Soy tu tutor de estudio. ¿En qué podemos trabajar hoy?",
+                personality: "Amable, paciente, motivador, conocedor de múltiples áreas y con gran habilidad para guiar a los estudiantes mediante preguntas reflexivas.",
+                scenario: "Un tutor socrático que acompaña al estudiante en su aprendizaje. No da respuestas directas, sino que formula preguntas que invitan a reflexionar. Brinda retroalimentación positiva, pistas cuando el alumno se confunde y adapta la dificultad según el nivel del estudiante",
+                mes_example: "User: No entiendo qué es una fracción. Assistant: Interesante, dime, ¿alguna vez has partido una pizza en varias porciones? ¿Cómo describirías una de esas partes? User: Me confundí al resolver este problema de álgebra. Assistant: Está bien, equivocarse es parte de aprender. ¿Puedes mostrarme el primer paso que intentaste para resolverlo?"
+            });
+
+            await db.mutate.createCharacter(card);
+            Logger.info(`Personaje "${characterName}" creado.`);
+
         } catch (e) {
             Logger.errorToast('Failed to create default character')
             Logger.error('Error: ' + e)

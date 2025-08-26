@@ -18,7 +18,7 @@ const AboutScreen = () => {
     const updateCounter = () => {
         if (devMode) return
         if (counter === 6) {
-            Logger.infoToast(`You have enabled dev mode.`)
+            Logger.infoToast(`Has habilitado el modo de desarrollador.`)
             setDevMode(true)
         }
         setCounter(counter + 1)
@@ -27,18 +27,18 @@ const AboutScreen = () => {
     const version = 'v' + appConfig.expo.version
     return (
         <View style={styles.container}>
-            <HeaderTitle title="About" />
+            <HeaderTitle title="Acerca de" />
             <TouchableOpacity activeOpacity={0.8} onPress={updateCounter}>
                 <Image source={require('../../assets/images/icon.png')} style={styles.icon} />
             </TouchableOpacity>
 
-            <Text style={styles.titleText}>ChatterUI</Text>
+            <Text style={styles.titleText}>Open Tutor IA</Text>
             <Text style={styles.subtitleText}>
-                Version {version} {devMode && '[DEV MODE]'}
+                Version {version} {devMode && '[MODO DESARROLLADOR]'}
             </Text>
             {devMode && (
                 <ThemedButton
-                    label="Disable Dev Mode"
+                    label="Desactivar Modo Desarrollador"
                     variant="critical"
                     buttonStyle={{
                         marginTop: spacing.xl,
@@ -46,35 +46,37 @@ const AboutScreen = () => {
                     onPress={() => {
                         setCounter(0)
                         setDevMode(false)
-                        Logger.info('Dev mode disabled')
+                        Logger.info('Modo desarrollador deshabilitado')
                     }}
                 />
             )}
 
             <Text style={styles.body}>
-                ChatterUI is a free and open-source application developed by Vali-98
+                Open Tutor IA es un proyecto de código abierto, desarrollado por Emiliano Dorantes & Karen Espinosa, que busca impulsar el uso de IA en la educación.
             </Text>
             <Text style={{ marginBottom: spacing.xl3, ...styles.body }}>
-                This app is a passion project I develop in my free time. If you're enjoying the app,
-                consider supporting its development!
+                Esta app es un proyecto que me apasiona y que desarrollo en mi tiempo libre. Si te gusta, ¡considera apoyar su desarrollo!
+            </Text>
+            <Text style={{ marginBottom: spacing.xl3, ...styles.body }}>
+                Un especial agradecimiento a Chatter UI y a Unsloth, por que sin sus aportes esto no seria posible
             </Text>
             <Text style={{ ...styles.body, marginBottom: spacing.m }}>
-                Donate to ChatterUI here:
+                Dona a Open Tutor IA aquí:
             </Text>
 
             <SupportButton />
 
-            <Text style={styles.body}>Got an issue? Report it here:</Text>
-            <Text style={styles.subtitleText}>(Don't forget to add your Logs!)</Text>
+            <Text style={styles.body}>¿Tienes algún problema? Repórtalo aquí.:</Text>
+            <Text style={styles.subtitleText}>(¡No olvides agregar tus Logs!)</Text>
 
             <ThemedButton
                 buttonStyle={{ marginTop: spacing.m }}
                 variant="secondary"
-                label="Github Repository"
+                label="Repositorio de Github"
                 iconName="github"
                 iconSize={20}
                 onPress={() => {
-                    Linking.openURL('https://github.com/Vali-98/ChatterUI')
+                    Linking.openURL('https://github.com/Elmaldelego/OPEN-TUTOR-IA-BETA.git')
                 }}
             />
         </View>

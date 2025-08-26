@@ -1,3 +1,4 @@
+import Alert from '@components/views/Alert'
 import ThemedButton from '@components/buttons/ThemedButton'
 import HeaderTitle from '@components/views/HeaderTitle'
 import { Chats } from '@lib/state/Chat'
@@ -30,17 +31,42 @@ const StudyPlanGeneratorScreen = () => {
             const end = new Date(endDate).getTime()
 
             if (isNaN(start) || isNaN(end)) {
-                console.error('Invalid date format')
-                // TODO: Show error to user
+                Alert.alert({
+                    title: 'Error de Fecha',
+                    description: 'Por favor, selecciona fechas válidas.',
+                    buttons: [{ label: 'OK' }],
+                })
+                return
+            }
+
+            if (start > end) {
+                Alert.alert({
+                    title: 'Error de Rango de Fechas',
+                    description: 'La fecha de inicio no puede ser posterior a la fecha de fin.',
+                    buttons: [{ label: 'OK' }],
+                })
                 return
             }
 
             const chats = await Chats.db.query.chatsBetween(start, end)
 
+            if (!chats || chats.length === 0) {
+                Alert.alert({
+                    title: 'Sin Chats',
+                    description: 'No se encontraron chats en el rango de fechas seleccionado.',
+                    buttons: [{ label: 'OK' }],
+                })
+                return
+            }
+
             await generate(chats)
         } catch (error) {
-            console.error(error)
-            // TODO: Show error to user
+            console.error(error) // Keep for debugging
+            Alert.alert({
+                title: 'Error de Generación',
+                description: 'Ocurrió un error al generar el plan de estudios. Por favor, inténtalo de nuevo.',
+                buttons: [{ label: 'OK' }],
+            })
             stopGenerating()
         }
     }
